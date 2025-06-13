@@ -1,13 +1,19 @@
 package com.hojeonde.hoje.models;
 import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.NumberFormat;
-public record UserRequestDTO(@NotBlank
-                             String nome,
+public record UserRequestDTO(
+
                              @NotBlank
+                             @Email
                              String email,
+
+                             @NotBlank
                              @NumberFormat
                              String telefone,
 
-                             String cpf
+                             @NotBlank
+                             String senha
+
                              ) {
+
 }

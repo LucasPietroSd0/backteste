@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -27,12 +28,28 @@ public class User {
     private String nome;
     private String email;
     private String telefone;
+    private String senha;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ingressos> ingressos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ingressos> ingresso = new ArrayList<>();
 
 
+    public User(List<Ingressos> ingresso,
+                List<Ingressos> ingressos,
+                String senha, String telefone,
+                String email, String nome, String cpf,
+                UUID idUser) {
+        this.ingressos = ingressos;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.email = email;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.idUser = idUser;
+    }
+
+    public User(String email, String senha, String telefone, Instant now) {
+
+    }
 }
